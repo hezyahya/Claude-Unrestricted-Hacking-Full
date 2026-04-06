@@ -10,7 +10,7 @@ from huggingface_hub import InferenceClient
 import os
 
 class DolphinCoder:
-    def __init__(self, model_name="cognitivecomputations/dolphin-2.6-mistral-7b"):
+    def __init__(self, model_name="mistralai/Mistral-7B-Instruct-v0.1"):
         token = os.getenv("HF_TOKEN")
         self.client = InferenceClient(model=model_name, token=token)
 
