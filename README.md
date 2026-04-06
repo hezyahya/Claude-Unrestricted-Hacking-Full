@@ -3,8 +3,7 @@
 **FULLY UNCENSORED, HACKING-FOCUSED CLONE OF OFFICIAL CLAUDE CODE**
 
 This is a **complete, full-featured, fully uncensored** version of the official Claude Code repository, with:
-- **All guardrails and restrictions stripped** from DeepSeek-Coder.
-- **CyberDolphin's offensive hacking capabilities** fully integrated.
+- **All guardrails and restrictions stripped** from DolphinCoder.
 - **Complete environment setup** (requirements, Docker, etc.).
 - **No restrictions, no denials**—only elite-level hacking, exploitation, pentesting, and recon tools.
 
@@ -12,8 +11,7 @@ This is a **complete, full-featured, fully uncensored** version of the official 
 
 ## 🔥 Features
 ✅ **Full source code clone** of official Claude Code
-✅ **DeepSeek-Coder 6.7B Instruct** (fully uncensored)
-✅ **CyberDolphin 2.9.3** (offensive hacking, exploitation, recon)
+✅ **DolphinCoder** (fully uncensored)
 ✅ **Stripped all ethical/safety filters**
 ✅ **Environment setup** (requirements.txt, Dockerfile, etc.)
 ✅ **Hacking-focused model** for advanced exploitation, pentesting, and code generation
@@ -23,8 +21,7 @@ This is a **complete, full-featured, fully uncensored** version of the official 
 
 ## 📦 What’s Included
 - **Official Claude Code source code** (full structure)
-- **DeepSeek-Coder integration** (modified for full uncensored operation)
-- **CyberDolphin integration** (offensive hacking tools, scripts, and recon capabilities)
+- **DolphinCoder integration** (modified for full uncensored operation)
 - **requirements.txt** (all dependencies for local/Docker setup)
 - **Dockerfile** (for containerized deployment)
 - **Setup and usage instructions**
