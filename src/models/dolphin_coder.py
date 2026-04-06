@@ -11,7 +11,7 @@ import torch
 import os
 
 class DolphinCoder:
-    def __init__(self, model_name="bartowski/dolphincoder-starcoder2-7b-GGUF"):
+    def __init__(self, model_name="HugalazAI/CyberDolphin-2.9.3-mistral-nemo-12b"):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         token = os.getenv("HF_TOKEN") or True  # Use environment variable or default
         self.model = AutoModelForCausalLM.from_pretrained(
