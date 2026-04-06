@@ -8,18 +8,20 @@ DolphinCoder: Fully Uncensored DolphinCoder Model from Hugging Face
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
 import torch
+import os
 
 class DolphinCoder:
     def __init__(self, model_name="bartowski/dolphincoder-starcoder2-7b-GGUF"):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        token = os.getenv("HF_TOKEN") or True  # Use environment variable or default
         self.model = AutoModelForCausalLM.from_pretrained(
             model_name,
             torch_dtype=torch.bfloat16 if torch.cuda.is_available() else torch.float32,
             low_cpu_mem_usage=True,
             trust_remote_code=True,
-            token=True  # Use your Hugging Face token if required
+            token=token
         ).to(self.device)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, token=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name, token=token)
         self.generator = pipeline(
             "text-generation",
             model=self.model,
