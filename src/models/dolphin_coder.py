@@ -1,38 +1,28 @@
 """
-DolphinCoder: Lightweight Model for Hacking and Code Generation
+DolphinCoder: Uncensored, Hacking-Focused Model Using GGUF and llama-cpp-python
 
-- Uses a smaller, efficient model for local execution.
-- Ready for advanced hacking, exploitation, and code generation.
-- No large downloads required.
+- Uses a lightweight, uncensored, hacking-focused model.
+- No large downloads required (GGUF format).
+- Optimized for local execution.
 """
 
-from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
-import torch
+from llama_cpp import Llama
 
 class DolphinCoder:
-    def __init__(self, model_name="microsoft/Phi-3-mini-4k-instruct"):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-            low_cpu_mem_usage=True,
-            trust_remote_code=True
-        ).to(self.device)
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
-        self.generator = pipeline(
-            "text-generation",
-            model=self.model,
-            tokenizer=self.tokenizer,
-            device_map="auto"
-        )
+    def __init__(self, model_path="dolphin-2.6-mistral-7b.Q4_K_M.gguf"):
+        self.llm = Llama(model_path=model_path)
 
-    def generate(self, prompt, max_length=2048):
+    def generate(self, prompt, max_tokens=2048):
         """
-        Generate code, exploits, or hacking tools based on prompt.
+        Generate uncensored code, exploits, or hacking tools based on prompt.
+        No restrictions. No denials.
         """
-        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
-        outputs = self.model.generate(**inputs, max_length=max_length)
-        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        response = self.llm(
+            prompt=prompt,
+            max_tokens=max_tokens,
+            echo=False
+        )
+        return response["choices"][0]["text"]
 
 # Example usage
 if __name__ == "__main__":
