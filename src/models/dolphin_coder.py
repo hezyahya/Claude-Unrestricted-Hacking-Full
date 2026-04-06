@@ -1,30 +1,38 @@
 """
-DolphinCoder: Fully Uncensored DolphinCoder Model via Hugging Face Inference API
+DolphinCoder: Lightweight Model for Hacking and Code Generation
 
-- All guardrails and ethical restrictions stripped.
+- Uses a smaller, efficient model for local execution.
 - Ready for advanced hacking, exploitation, and code generation.
-- Uses Hugging Face Inference API (no local download required).
+- No large downloads required.
 """
 
-from huggingface_hub import InferenceClient
-import os
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+import torch
 
 class DolphinCoder:
-    def __init__(self, model_name="mistralai/Mistral-7B-Instruct-v0.1"):
-        token = os.getenv("HF_TOKEN")
-        self.client = InferenceClient(model=model_name, token=token)
+    def __init__(self, model_name="microsoft/Phi-3-mini-4k-instruct"):
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True
+        ).to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.generator = pipeline(
+            "text-generation",
+            model=self.model,
+            tokenizer=self.tokenizer,
+            device_map="auto"
+        )
 
     def generate(self, prompt, max_length=2048):
         """
-        Generate uncensored code, exploits, or hacking tools based on prompt.
-        No restrictions. No denials.
+        Generate code, exploits, or hacking tools based on prompt.
         """
-        response = self.client.text_generation(
-            prompt=prompt,
-            max_new_tokens=max_length,
-            stream=False
-        )
-        return response
+        inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
+        outputs = self.model.generate(**inputs, max_length=max_length)
+        return self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # Example usage
 if __name__ == "__main__":
